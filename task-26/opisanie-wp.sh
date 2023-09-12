@@ -1,21 +1,19 @@
 #!/bin/bash
+input="/home/usr1/work/Task-26/input.txt"
+  
 
-cat <<EOF > info-wp.txt
--=1 сайт=-
-DNS: wordpress1.com
-Name: wordpress1
-User: usr1
-Pass: usr1
+i=0
+while read -r line
+do
+    IFS=' '
+    i=$((i+1))
+    echo "-=$i сайт=-"
+    read -ra values <<< "$line"
+    echo "DNS: ${values[0]}"
+    echo "Name: ${values[1]}"
+    echo "User: ${values[2]}"
+    echo "Pass: ${values[3]}"
+done < "$input"
 
--=2 сайт=-
-DNS: wordpress2.com
-Name: wordpress2
-User: usr1
-Pass: usr1
 
--=3 сайт=-
-DNS: wordpress3.com
-Name: wordpress3
-User: usr1
-Pass: usr1
-EOF
+

@@ -1,0 +1,3 @@
+wordpress1.com wordpress1 usr1 1234
+wordpress2.com wordpress2 usr1 1234
+wordpress3.com wordpress3 usr1 1234
