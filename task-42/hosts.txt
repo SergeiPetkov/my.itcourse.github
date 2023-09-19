@@ -1,0 +1,7 @@
+[WP_SERVERS]
+linux243 ansible_host=192.168.1.155
+
+[RESERVE]
+linux134 ansible_host=192.168.1.134
+linux130 ansible_host=192.168.1.130
+
