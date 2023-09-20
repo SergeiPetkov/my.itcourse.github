@@ -1,7 +1,7 @@
 
 ---
 - name: Install Apache and Upload my Web Page
-  hosts: WP-SERVERS
+  hosts: WP_SERVERS
   become: yes
 
   vars:
