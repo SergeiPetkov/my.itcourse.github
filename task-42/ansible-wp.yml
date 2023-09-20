@@ -14,6 +14,11 @@
     - name: Ping test
       ping:
   
+    - name: Apt update and upgrade
+      shell: |
+        sudo apt update
+        sudo apt upgrade -y
+        
     - name: Install all packages to WP
       shell:
         "apt install apache2 \
