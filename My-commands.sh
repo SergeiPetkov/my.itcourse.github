@@ -2,17 +2,24 @@ net-stats #сначала установить
 sudo apt install net-tools
 sudo netstat -ntlup #прослушиваемые порты
 netstat -ntlup
-ps aux | grep  #процессы
+ps aux | grep (имя процесса) #процессы
 df -h   #информация про жесткий диск в читаемом формате мб гб
 grep -r 80 .
-sudo vi var/log/  #логи тут
+sudo vi var/log/  #логи тут  grep *.log .
 lsblk #информация про Жесткий диск
-sudo systemctl reload apache2
+
 sudo tail -f /var/log/apache2/*.log #просмотр логов *.log покажет логи всех файлов
+sudo tail -f /var/log/nginx/*.log
 sudo apt-get purge php*  # удаление всех версий программы
 sudo apt-get remove --auto-remove example #
-??вывести список всех пакетов - например php
-
+apt list --installed | grep php # вывести список всех пакетов - например php
+cat test2.txt | grep 161 | wc  # 50  54  1321 выводит количство -строк -слов -символов
+curl -s -k https://siteip.com |grep 192
+sudo lshw  # подробная информация о железе
+sudo lshw -C display -html > hardware_info.html
+lsb_release -a 
+for i in {1..100}; do curl http://siteip.com | grep 192; done >> test2.txt
+cat test2.txt | grep 20 | wc
 
 ansible
 ansible-playbook install_packages.yml --start-at-task="#имя таски" -vvvv # запуск с определнной таски
@@ -39,9 +46,6 @@ github
 git add .
 git commit -m ""
 git push -u origin main
-
-
-
 
 
 apache2
@@ -77,9 +81,12 @@ sudo chmod -R 755 /var/www/koti.com
 sudo vi /var/www/koti.com/html/index.html
 sudo vi /etc/nginx/sites-available/koti.com
 sudo ln -s /etc/nginx/sites-available/koti.com /etc/nginx/sites-enabled/
+sudo unlink /etc/nginx/sites-enabled/default 
 sudo nginx -t
 sudo systemctl restart nginx
         proxy_pass http://localhost:80; <----<< куда переводит прокси
+
+
 
 ssl
 https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-20-04
@@ -91,7 +98,6 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/usr1/apac
 ssl nginx
 https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-20-04-1
 sudo ufw enable
-mkdir -p //home/usr1/ssl/certs
 mkdir -p /home/usr1/ssl/certs
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/usr1/ssl/private/nginx-selfsigned.key -out /home/usr1/ssl/certs/nginx-selfsigned.crt
 sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
@@ -101,7 +107,7 @@ sudo vi /etc/nginx/snippets/self-signed.conf
 ssl_certificate /home/usr1/ssl/certs/nginx-selfsigned.crt;
 ssl_certificate_key /home/usr1/ssl/private/nginx-selfsigned.key;
 
-sudo vi /etc/nginx/snippets/ssl-params.conf #конфигурацияс сильными настройками шифрования
+sudo vi /etc/nginx/snippets/ssl-params.conf #конфигурация с сильными настройками шифрования
 ssl_protocols TLSv1.3;
 ssl_prefer_server_ciphers on;
 ssl_dhparam /etc/nginx/dhparam.pem; 
