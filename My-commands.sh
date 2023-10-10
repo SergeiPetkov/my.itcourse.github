@@ -20,6 +20,8 @@ sudo lshw -C display -html > hardware_info.html
 lsb_release -a 
 for i in {1..100}; do curl http://siteip.com | grep 192; done >> test2.txt
 cat test2.txt | grep 20 | wc
+#route print в Windows маршрутизации все, посмотреть в LInux
+
 
 ansible
 ansible-playbook install_packages.yml --start-at-task="#имя таски" -vvvv # запуск с определнной таски
@@ -133,3 +135,10 @@ sudo cp /etc/nginx/sites-available/koti.com /etc/nginx/sites-available/koti.com.
 
 curl -kI https://koti.com #для проверки
 curl -kI http://koti.com
+
+
+Docker
+
+# инструкция установки https://docs.docker.com/engine/install/ubuntu/
+# команда добавляет строку с информацией о репозитории Docker в файл /etc/apt/sources.list.d/docker.list
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null

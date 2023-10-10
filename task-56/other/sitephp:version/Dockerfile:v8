@@ -1,0 +1,22 @@
+FROM ubuntu:22.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    php \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY ./sitephp /var/www/sitephp/html
+
+COPY ./sitephp.conf /etc/apache2/sites-available/sitephp.conf
+
+RUN a2enmod rewrite
+RUN a2dissite 000-default
+RUN a2ensite sitephp
+
+ENTRYPOINT ["apache2ctl"]
+CMD ["-D", "FOREGROUND"]
+
+EXPOSE 80
