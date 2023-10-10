@@ -1,11 +1,12 @@
-# Операционная система и ее версия
+# Дистрибутив базового образа
 FROM ubuntu:22.04
 
 # Контактная информация
 LABEL maintainer="sergey@example.com" \
-      description="Apache2 and PHP, port 80"
+      description="Apache2 and PHP, port 80" \
+      release_date=10.10.2023
 
-# Убирает интерактивный режим при установки ОС
+# Выключение интерактивного режима
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Установка Apache2 и PHP, после чего очистка кэша и временных файлов
@@ -29,7 +30,7 @@ RUN a2enmod rewrite \
 # Исполняемый файл для запуска и управления apache2
 ENTRYPOINT ["apache2ctl"]
 
-# Включает процесс в активном режиме
+# Включение процесс в активном режиме
 CMD ["-D", "FOREGROUND"]
 
 # Прослушиваемый порт в запущенном контейнере
