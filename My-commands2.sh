@@ -15,6 +15,10 @@
 </body>
 </html>
 
+# Репозиторий Debian stretch repositories 404 Not Found
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+           -e 's|security.debian.org|archive.debian.org/|g' \
+           -e '/stretch-updates/d' /etc/apt/sources.list
 
 
 ######################
@@ -23,3 +27,13 @@ https://www.youtube.com/watch?v=Q0OwEKtncPc&t=996s
 ###############################################################
 Dockerfile apache2 php
 ###############################################################
+
+sudo docker build -t example1 .
+sudo docker run -it example1
+
+swaks --to akondratov1990@gmail.com --from sp8997778@gmail.com --server smtp.google.com --port 587 --tls --auth LOGIN  --header "Subject: Тестовое письмо" --body "Это тестовое письмо"
+swaks --to akondratov1990@gmail.com --server smtp.ionos.de:587 --auth LOGIN
+# установка VIM в DEBIAN
+apt-get update && apt-get install apt-file -y && apt-file update && apt-get install vim -y
+
+
