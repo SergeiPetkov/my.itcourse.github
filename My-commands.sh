@@ -48,7 +48,12 @@ github
 git add .
 git commit -m ""
 git push -u origin main
-
+#######
+git status
+git checkout -b "branch_name"
+git add .
+git commit -m "commit message"
+git push origin branch_name
 
 apache2
 sudo vi /etc/apache2/ports.conf #не работает с wordpress
@@ -144,3 +149,8 @@ Docker
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 docker inspect id | grep IP
+
+# Если не ставится vim в контейнер то использую
+RUN apt-get update && apt-get install apt-file -y && apt-file update && apt-get install vim -y
+# для обновления пакетов Дебиан можно использовать
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' -e 's|security.debian.org|archive.debian.org/|g' -e '/stretch-updates/d' /etc/apt/sources.list
