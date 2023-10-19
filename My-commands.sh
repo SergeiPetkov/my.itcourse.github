@@ -54,6 +54,27 @@ git checkout -b "branch_name"
 git add .
 git commit -m "commit message"
 git push origin branch_name
+# git config --global user.name "SergeiPetkov"
+# git config --global user.email "sp8997778@gmail.com"
+# просмотр комитов -2 это нужное количество комитов 
+git log --pretty=oneline -2 
+# можно добавить тэги с версиями (в конце выписан хэш комита из git log --pretty=oneline -5 )
+git tag -a v1.1 -m "Мой тег версии 1.1" 435f684
+# просмотр тэгов 
+git tag
+# легковесный тэг 
+git tag v1.2-lw
+# по количеству эпох
+git tag -a "v1.1-`date +%s`"
+# пушит все новые таги
+git push origin --tags
+# склонирует ПОЛНОСТЬЮ весь репозиторий и просто переключится на ветку branch-name:
+git clone http://whatever.git -b branch-name
+# склонировать ТОЛЬКО конкретную ветку, и 2 последних комита тогда:
+git clone --branch=branch-name --depth=2 --single-branch http://whatever.git
+git checkout tag_name
+# Удаление тага
+git tag -d v1.3
 
 apache2
 sudo vi /etc/apache2/ports.conf #не работает с wordpress
@@ -143,14 +164,24 @@ curl -kI http://koti.com
 
 
 Docker
-
 # инструкция установки https://docs.docker.com/engine/install/ubuntu/
-# команда добавляет строку с информацией о репозитории Docker в файл /etc/apt/sources.list.d/docker.list
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 docker inspect id | grep IP
+
+sudo docker build -t example1 .
+sudo docker run -it example1
+
+# Удаление всех томов образов и отключенных контейнеров (Команда запрашивает ответ Y)
+docker system prune -a
+
+# команда добавляет строку с информацией о репозитории Docker в файл /etc/apt/sources.list.d/docker.list
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Если не ставится vim в контейнер то использую
 RUN apt-get update && apt-get install apt-file -y && apt-file update && apt-get install vim -y
 # для обновления пакетов Дебиан можно использовать
 RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' -e 's|security.debian.org|archive.debian.org/|g' -e '/stretch-updates/d' /etc/apt/sources.list
+
+
+
+

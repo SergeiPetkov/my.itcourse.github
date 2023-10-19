@@ -27,13 +27,17 @@ https://www.youtube.com/watch?v=Q0OwEKtncPc&t=996s
 ###############################################################
 Dockerfile apache2 php
 ###############################################################
-
 sudo docker build -t example1 .
 sudo docker run -it example1
+
+# Удаление всех томов образов и отключенных контейнеров (Команда запрашивает ответ Y)
+docker system prune -a
 
 swaks --to akondratov1990@gmail.com --from sp8997778@gmail.com --server smtp.google.com --port 587 --tls --auth LOGIN  --header "Subject: Тестовое письмо" --body "Это тестовое письмо"
 swaks --to akondratov1990@gmail.com --server smtp.ionos.de:587 --auth LOGIN
 # установка VIM в DEBIAN
 apt-get update && apt-get install apt-file -y && apt-file update && apt-get install vim -y
 
-
+Proxmox 
+Выбрать VM -> Hardware -> Hard dicsc -> Disc action -> + Resize -> ввод памяти
+sudo lvresize --size +10G --resizefs /dev/mapper/ubuntu--vg-ubuntu--lv  (имя записанно df -h)
