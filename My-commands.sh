@@ -36,6 +36,10 @@ mysql
 sudo mysql -u root -e "SHOW DATABASES;"
 sudo mysql -u root -e "SELECT user, HOST FROM mysql. user;"
 
+#зашифровать пароли 
+sudo apt-get install mysql-client
+mysql_config_editor
+sudo -u usr1 mysql_config_editor set --login-path=local --host=simple-django-project-db-1 --user=root --password
 
 mariadb
 sudo systemctl start mariadb
