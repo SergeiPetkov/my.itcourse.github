@@ -1,5 +1,5 @@
 #!/bin/bash
-input="/home/usr1/work/Task-26/input.txt"
+input=input.txt #Файл в той же директории, либо полный путь до файла /home/usr1/input.txt
   
 
 i=0
@@ -13,7 +13,7 @@ do
     echo "Name: ${values[1]}"
     echo "User: ${values[2]}"
     echo "Pass: ${values[3]}"
-done < "$input"
+done < "$input" >> test.txt
 
 
 

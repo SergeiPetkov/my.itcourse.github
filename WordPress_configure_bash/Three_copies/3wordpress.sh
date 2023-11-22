@@ -1,7 +1,5 @@
 #!/bin/bash
 
-whoami
-
 # Этот скрипт устанавливает пакеты и настраивает Apache для WordPress.
 echo "Начинаю установку пакетов..."
 sudo apt install apache2 \

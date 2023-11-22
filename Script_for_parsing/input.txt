@@ -1,0 +1,4 @@
+wordpress1.com wordpress1 ubuntu ubuntu
+wordpress2.com wordpress2 ubuntu ubuntu
+wordpress3.com wordpress1 ubuntu ubuntu
+wordpress4.com wordpress2 ubuntu ubuntu

@@ -1,0 +1,15 @@
+-=1 сайт=-
+DNS: wordpress1.com
+Name: wordpress1
+User: ubuntu
+Pass: ubuntu
+-=2 сайт=-
+DNS: wordpress2.com
+Name: wordpress2
+User: ubuntu
+Pass: ubuntu
+-=3 сайт=-
+DNS: wordpress3.com
+Name: wordpress1
+User: ubuntu
+Pass: ubuntu

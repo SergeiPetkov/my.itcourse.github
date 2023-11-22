@@ -1,6 +1,3 @@
-
-#Моя любимая часть - РЕДАКТИРОВАНИЕ файла /etc/hosts на клиентском сервере!!! 
-
 #Часть 3 Балансировщик нагрузки Nginx
 sudo apt install nginx -y
 sudo vi /etc/nginx/sites-available/siteip.conf
