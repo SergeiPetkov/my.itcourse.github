@@ -1,0 +1,37 @@
+---
+- name: Error Lesson
+  hosts: ALL_LINUX
+  become: yes
+
+  tasks:
+  - name: Install AP with errors
+    apt:
+      name: treeeeeeeeeeeeeee
+      state: latest
+    ignore_errors: yes
+    register: result
+
+  - name: Check the result
+    debug:
+      var: result
+
+  - name: Task2
+    shell: echo Hello World!
+    register: results
+    failed_when: "'World' in results.stdout"  #в выводе ошибка "failed_when_result": true
+
+  - debug:
+      var: results
+
+  - name: Task3
+    shell: echo Privet Mir
+
+
+
+
+
+
+
+
+
+

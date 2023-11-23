@@ -1,0 +1,4 @@
+---
+# vars file for deploy_apache_web
+destin_folder: var/www/html 
+# destin_folder_permissions: '0555' #В видео мы эти записи в defaults папка файл main.yml

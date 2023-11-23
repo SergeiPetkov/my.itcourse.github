@@ -1,0 +1,9 @@
+
+---
+ - name: Allow usr1 to run a specific command without a password
+   hosts: all
+   become: yes
+   tasks:
+     - name: Add sudoers rule
+       command: "echo 'usr1 ALL=(ALL) NOPASSWD: /bin/ls' > /etc/sudoers.d/usr1"
+

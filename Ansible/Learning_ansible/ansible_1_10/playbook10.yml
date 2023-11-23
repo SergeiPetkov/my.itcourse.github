@@ -1,0 +1,41 @@
+
+---
+- name: My super Puper Playbook for Variables Leeson
+  hosts: all
+  become: yes
+
+  vars:
+    message1: Privet
+    message2: World
+    secret  : POSDSASSPO3FK
+
+  tasks:
+    
+  - name: Print Secret variable
+    debug:
+      var: secret
+
+  - debug: 
+      msg: "Sekretnoe slovo: '{{ secret }}'"
+       
+  - set_fact:
+      name: Sliyanie Mes1 i Mes2
+      full_message: "{{ message1 }} {{ message2 }}"
+
+  - debug:
+      var: full_message
+  
+  - debug:
+      var: ansible_distribution
+     
+  - shell: uptime  #После болка с Шелл не должно быть отступов
+    register: results
+
+  - debug: 
+      var: results.end
+
+
+
+
+
+

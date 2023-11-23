@@ -1,0 +1,41 @@
+
+---
+- name: My super Playbook
+  hosts: all
+    
+  vars:
+    mytext: "Privet Mir"
+
+  tasks:
+  - name: Ping test
+    ping:
+
+  - name: Unregister Server from Load Balancer
+    shell: echo this server {{ inventory_hostname }} was registered from your Load Balancer, node name is {{ ansible_nodename }} >> /home/usr1/log.txt  
+    delegate_to: 127.0.0.1
+
+  - name: Create file1
+    copy:
+      dest: /home/usr1/file1.txt
+      content: |
+        This is fileN1
+        On ENGLISH Hello World
+        On RUSSIAN {{ mytext }}
+
+  - name: Create file2
+    copy:
+      dest: /home/usr1/file2.txt
+      content: |
+        This is file2
+        Text Line2, in file
+        On RUSSIAN {{ mytext }}
+    delegate_to: linux243
+
+
+  - name: WHOAMI
+    shell: whoami
+    register: result
+
+  - name: Display whoami result
+    debug:
+      var: result.stdout 

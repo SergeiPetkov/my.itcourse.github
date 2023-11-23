@@ -1,0 +1,33 @@
+---
+- name: Error Lesson
+  hosts: ALL_LINUX
+  any_errors_fatal: true
+  become: yes
+
+  tasks:
+  - name: Install AP with errors
+    block:
+      - name: Try to install tree
+        apt:
+          name: treeeeeeeeeeeeeee
+          state: latest
+        ingore_errors: no
+        register: result
+
+      - name: Check the result
+        debug:
+          var: result
+    rescue:
+      - name: Handle the error
+        debug:
+          msg: "Installation failed, but we are continuing with the playbook."
+
+  - name: Task2
+    shell: echo Hello World!
+    register: results
+
+  - debug:
+      var: results
+
+  - name: Task3
+    shell: echo Privet Mir

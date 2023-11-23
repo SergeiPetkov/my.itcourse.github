@@ -1,0 +1,26 @@
+
+---
+- name: My super Playbook
+  hosts: all
+  become: yes
+  
+  vars:
+    mytext: "Privet ot Serejki"
+
+  tasks:
+  - name: Ping test
+    ping:
+  
+  - name: Create Folders #Можно удалить строки с  - name:, include будет работать
+    include_tasks: create_folders.yml
+
+  - name: Create Files
+    include_tasks: create_files.yml   
+   
+  - name: Run whoami command
+    shell: whoami
+    register: result
+
+  - name: Display whoami result
+    debug:
+      var: result.stdout 

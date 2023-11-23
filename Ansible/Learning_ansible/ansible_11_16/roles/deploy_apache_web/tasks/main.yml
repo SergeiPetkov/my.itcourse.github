@@ -1,0 +1,49 @@
+---
+# tasks file for deploy_apache_web
+#block: # =======Block for UBUNTU=========
+- name: Install Apache Web Server for Debian
+  apt:
+    name: apache2
+    state: latest        
+#when: ansible_os_family == "Debian" #Также можно добавить блок для установки на "RadHat"   
+
+#- name: Ensure var/www/html directory exists
+  # file:
+    # path: /var/www/html
+      # state: directory
+      # mode: '0755'
+      # owner: usr1  # Установите правильного владельца
+      # group: usr1  # Установите правильную группу
+ # become: yes
+    # when: ansible_os_family == "Debian"  #Это тоже с разными ОС
+       
+
+
+- name: Generate INDEX.HTML file
+  template: 
+    src: index.j2
+    dest: /var/www/html/index.html  # dest: "{{ destin_folder }}/index.html"
+    mode: 0555
+
+- name: Copy images to the server
+  copy:
+    src: /home/usr1/work/ansible_11_16/roles/deploy_apache_web/files/100330-yana.png
+    dest: /var/www/html/100330-yana.png
+    owner: usr1
+    group: usr1
+    mode: '0644'
+
+- name: Copy another image to the server
+  copy:
+    src: /home/usr1/work/ansible_11_16/roles/deploy_apache_web/files/1005500-yana.png
+    dest: /var/www/html/1005500-yana.png
+    owner: usr1
+    group: usr1
+    mode: '0644'
+
+
+- name: Start Webserver and make it enable on boot
+  service:
+    name: apache2
+    state: started
+    enabled: yes  

@@ -1,0 +1,7 @@
+
+[ALL_LINUX]
+linux74 ansible_host=192.168.1.74
+
+[TEST]
+linux82 ansible_host=192.168.1.82
+linux243 ansible_host=192.168.1.243

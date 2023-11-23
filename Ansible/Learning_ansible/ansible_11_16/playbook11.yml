@@ -1,0 +1,10 @@
+
+---
+- name: Install Apache and Upload my Web Page
+  hosts: "{{ MYHOSTS }}" #Для записи вручную группы и запуска из списка hosts.txt
+  become: yes 
+
+  roles:
+    - deploy_apache_web
+#   - { role: deploy_apache_web, when: ansible_system == 'Linux' } Такой вид при выполнении с комндой when (не тестировал)
+           

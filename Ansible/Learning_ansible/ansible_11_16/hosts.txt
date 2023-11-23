@@ -1,0 +1,5 @@
+[WEB]
+linux243 ansible_host=192.168.1.243
+
+[WEB_SERVERS]
+linux74 ansible_host=192.168.1.74

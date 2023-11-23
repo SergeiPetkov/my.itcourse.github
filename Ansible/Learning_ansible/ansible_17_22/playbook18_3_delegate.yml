@@ -1,0 +1,26 @@
+
+---
+- name: Reboot my Serevers
+  hosts: TEST
+  become: yes
+
+  tasks:
+  - name: Reboot
+#   shell: sleep 3 && reboot now
+    reboot:
+    async: 1
+    poll: 0
+
+  - name: Wait till my server will come up online
+    wait_for:
+       host: '{{ inventory_hostname }}'
+       state: started
+       delay: 5
+       timeout: 40
+    delegate_to: 127.0.0.1   
+   
+  - name: Ping test  
+    ping:
+
+
+

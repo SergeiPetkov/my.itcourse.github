@@ -1,0 +1,21 @@
+
+---
+
+- name: Create folder1
+  file:
+    path: /home/usr1/folder1
+    state: directory
+    owner: usr1
+    group: usr1
+    mode: 0755
+
+- name: Create folder2
+  file:
+    path: /home/usr1/folder2
+    state: directory
+    owner: usr1
+    group: usr1  
+    mode: 0755
+
+
+    

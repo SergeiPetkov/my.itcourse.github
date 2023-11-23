@@ -1,0 +1,25 @@
+
+---
+- name: Error Lesson
+  hosts: ALL_LINUX
+#  any_errors_fatal: true #Любая ошибка останавливает все процессы ansible
+  become: yes
+  
+  tasks: 
+  - name: Install AP with errors
+    apt:
+      name: treeeeeeeeeeeeeee
+      state: latest
+    ignore_errors: yes #Вот правильное написание пропуска ошибок 
+    register: result
+
+
+  - name: Task2
+    shell: echo Hello World!
+    register: result  
+  
+  - debug:
+      var: results
+
+  - name: Task3
+    shell: echo Privet Mir    

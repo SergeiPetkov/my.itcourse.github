@@ -1,0 +1,3 @@
+---
+# defaults file for deploy_apache_we
+destin_folder: var/www/html
