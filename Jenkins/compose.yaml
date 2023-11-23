@@ -1,0 +1,51 @@
+version: '3.8'
+
+networks:
+  network1:
+    # Сеть между контейнерами
+    name: network1
+
+services:
+  db:
+    # Образ mysql
+    image: mysql:8.0.15
+
+    # Автоматический перезапуск
+    restart: always
+
+    environment:
+      # Переменные окружения в mysql
+      MYSQL_DATABASE: 'world'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'xxxx'
+      MYSQL_ROOT_PASSWORD: 'xxxx'
+
+    ports:
+      # Cвязывание порта контейнера с портом хоста
+      - '3306:3306'
+
+    expose:
+      # Порт внутри контейнера видимый для других контейнеров в той же сети
+      - '3306'
+
+    volumes:
+      # Монтирование тома в контейнере
+      - /home/usr1/simple-django-project/world.sql:/mysql-files/world.sql
+      - /var/lib/mysql1:/var/lib/mysql
+      
+  django:
+    image: sergeypetkov/django:${TAG}
+    # Автоматический перезапуск
+    restart: always
+
+    ports:
+      # Cвязывание порта контейнера с портом хоста
+      - '8001:8001'
+
+    expose:
+      # Порт внутри контейнера видимый в этой сети
+      - '8001'
+      
+    depends_on:
+      # Включение после контейнера db
+      - db

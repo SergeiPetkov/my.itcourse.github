@@ -26,6 +26,8 @@ SSH
 
 ssh -o StrictHostKeyChecking=accept-new usr1@192.168.1.$ip_4 "touch example$2.txt"
 scp -o "StrictHostKeyChecking no" /home/usr1/compose.yaml usr1@192.168.1.$ip_4:/home/usr1/simple-django-project/
+# БД в докер контейнере 
+ssh -o StrictHostKeyChecking=accept-new usr1@192.168.1.244 "docker exec -i simple-django-project-db-1 mysql -u root -h simple-django-project-db-1 -p -e 'use world; source /mysql-files/world.sql;'"
 
 ansible
 ansible-playbook install_packages.yml --start-at-task="#имя таски" -vvvv # запуск с определнной таски
