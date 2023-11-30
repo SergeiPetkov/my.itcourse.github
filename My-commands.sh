@@ -7,6 +7,7 @@ df -h   #информация про жесткий диск в читаемом
 grep -r 80 .
 sudo vi var/log/  #логи тут  grep *.log .
 lsblk #информация про Жесткий диск
+sudo echo "usr1 ALL=(ALL) NOPASSWD: ALL" /etc/sudoers
 
 sudo tail -f /var/log/apache2/*.log #просмотр логов *.log покажет логи всех файлов
 sudo tail -f /var/log/nginx/*.log
@@ -66,6 +67,12 @@ git commit -m "commit message"
 git push origin branch_name
 # git config --global user.name "SergeiPetkov"
 # git config --global user.email "sp8997778@gmail.com"
+
+git log # Покажет хэш последних коммитов --help
+git branch -a
+git ls-remote
+# Обновляет удаленные отслеживаемые ветки
+git fetch origin
 # просмотр комитов (-2 это нужное количество комитов)
 git log --pretty=oneline -2 
 # можно добавить тэги с версиями (в конце выписан хэш комита из git log --pretty=oneline -5 )
@@ -89,6 +96,7 @@ git push --delete origin v1.1
 # Мердж (слияние), перехожу на ветку на которой нужно добавить комиты с другой ветки
 git merge my-new-branch
 git branch -d my-new-branch
+
 
 
 apache2
