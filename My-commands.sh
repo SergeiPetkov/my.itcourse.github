@@ -7,7 +7,9 @@ df -h   #информация про жесткий диск в читаемом
 grep -r 80 .
 sudo vi var/log/  #логи тут  grep *.log .
 lsblk #информация про Жесткий диск
+sudo du -h --max-depth=1 /var/opt/gitlab/ | sort -h # Прокажет сколько весят каталоги
 sudo echo "usr1 ALL=(ALL) NOPASSWD: ALL" /etc/sudoers
+stress-ng --cpu 2 --io 1 --vm-bytes 3G --timeout 60s --metrics-brief > metrics_report.txt
 
 sudo tail -f /var/log/apache2/*.log #просмотр логов *.log покажет логи всех файлов
 sudo tail -f /var/log/nginx/*.log
@@ -15,7 +17,7 @@ sudo apt-get purge php*  # удаление всех версий програм
 sudo apt-get remove --auto-remove example #
 apt list --installed | grep php # вывести список всех пакетов - например php
 cat test2.txt | grep 161 | wc  # 50  54  1321 выводит количство -строк -слов -символов
-curl -s -k https://siteip.com |grep 192
+curl -s -k https://siteip.com | grep 192
 sudo lshw  # подробная информация о железе
 sudo lshw -C display -html > hardware_info.html
 lsb_release -a 
@@ -219,4 +221,9 @@ docker compose up --force-recreate
 # Переменная, путь к файлу, и пересоздание контейнеров
 TAG=$IMAGE_TAG docker compose -f /home/usr1/simple-django-project/compose.yaml up -d --force-recreate
 
+
+Prometheus
+gitlab-ctl stop prometheus
+rm -rf /var/opt/gitlab/prometheus/data/*
+gitlab-ctl start prometheus
 

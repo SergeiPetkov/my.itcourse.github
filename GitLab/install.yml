@@ -1,0 +1,14 @@
+---
+- name: Install GitLab
+  hosts: gitlab_worker
+  become: yes
+
+  tasks:
+    - name: Download GitLab repository installation script
+      shell: curl --silent "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh" | sudo bash
+
+    - name: Install GitLab package (download only)
+      shell: sudo apt-get install --download-only gitlab-ee
+        
+    - name: Install GitLab using dpkg
+      shell: sudo EXTERNAL_URL="http://test.gitlab" dpkg -i /var/cache/apt/archives/gitlab-ee_16.6.0-ee.0_amd64.deb

@@ -42,9 +42,11 @@
     - name: Create and load wordpress
       shell: 
         mkdir -p /srv/www/"{{ WP_APP_NAME }}"
+
     - name: Change owner to usr1
       shell:  
         chown -R "{{ WP_USER_NAME }}"":""{{ WP_USER_NAME }}" /srv/www/"{{ WP_APP_NAME }}"
+        
     - name: Install and load WP 
       shell: 
         curl https://wordpress.org/latest.tar.gz | sudo -u "{{ WP_USER_NAME }}" tar zx -C /srv/www/"{{ WP_APP_NAME }}"           
@@ -54,7 +56,7 @@
         mkdir /etc/httpd/sites-available
         mkdir /etc/httpd/sites-enabled
         sudo sed -i '/IncludeOptional conf\.d\/\*\.conf/a IncludeOptional sites-enabled\/\*\.conf' /etc/httpd/conf/httpd.conf
-     # sudo sed -i 's/IncludeOptional conf\.d\/\*\.conf/IncludeOptional sites-enabled\/\*\.conf/' /etc/httpd/conf/httpd.conf
+     
         
 
     - name: Create "{{ WP_APP_NAME }}".conf apache2
