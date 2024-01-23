@@ -24,6 +24,8 @@ lsb_release -a
 for i in {1..100}; do curl http://siteip.com | grep 192; done >> test2.txt
 cat test2.txt | grep 20 | wc
 #route print в Windows маршрутизации все, посмотреть в LInux
+DBPASS=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c12`
+echo $DBPASS
 
 SSH 
 

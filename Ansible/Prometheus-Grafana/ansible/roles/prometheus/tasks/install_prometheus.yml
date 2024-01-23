@@ -55,7 +55,7 @@
     src=templates/prometheus.service
     dest=/etc/systemd/system/
   notify:
-    - systemd reload
+    - s reloaystemdd
 
 - name: Systemctl Prometheus Start
   systemd:

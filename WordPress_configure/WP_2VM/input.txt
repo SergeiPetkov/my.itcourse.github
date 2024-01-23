@@ -1,0 +1,4 @@
+wordpress1.com wordpress1 usr1 12345 mysqldb 
+wordpress2.com wordpress2 usr2 12345 mysqldb
+wordpress3.com wordpress3 usr3 12345 mysqldb
+
