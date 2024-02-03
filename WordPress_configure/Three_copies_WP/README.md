@@ -1,6 +1,6 @@
 # Развертывание 3 экземпляров WordPress на локальном хосте
 ## Пошаговое выполнение взято из оффициальной документации Ubuntu configurate Wordpress:
-1. Устанавливка пакетов и настройка Apache
+1. Установка пакетов
 2. Создание массива с данными для установки WordPress
 ```bash
 wordpress_sites=("wordpress1" "wordpress2" "wordpress3")
