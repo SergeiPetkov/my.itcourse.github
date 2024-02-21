@@ -41,3 +41,14 @@ apt-get update && apt-get install apt-file -y && apt-file update && apt-get inst
 Proxmox 
 Выбрать VM -> Hardware -> Hard dicsc -> Disc action -> + Resize -> ввод памяти
 sudo lvresize --size +10G --resizefs /dev/mapper/ubuntu--vg-ubuntu--lv  (имя записанно df -h)
+
+
+
+PostgreSQL
+# Подключение
+psql -U user -d postgres_db 
+
+\dt
+SELECT * FROM name_tables;
+
+
