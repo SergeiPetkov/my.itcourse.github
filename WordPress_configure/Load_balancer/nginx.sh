@@ -63,8 +63,8 @@ server {
 }
 
 upstream back_server {
-    server 192.168.1.20:80;
-    server 192.168.1.193:80;
+    server 192.168.1.20:80 weight=9;
+    server 192.168.1.193:80 weight=1;
 }
 ####################################
 
