@@ -41,6 +41,10 @@ volumes:
 ```bash
 docker compose up -d
 ```
+3. Вход PgAdmin в браузере ip_host:5050
+
+## Дополнительная информация по докеру
+
 3. Информация о томах контейнера
 ```bash
 docker volume inspect имя_контейнера
