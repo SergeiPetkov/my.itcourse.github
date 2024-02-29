@@ -1,0 +1,56 @@
+# Этот пайплайн для изучения и проверки артефактов
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables: 
+  VAR1: Sergey
+  VAR2: "${VAR1}_Petkov" # Проверенно вывод = - echo ${VAR2} = Sergey_Petkov
+
+build-job: # В следующих джобах указать dependencies: - build-job # Указание именно его, а не стейджа
+  stage: build
+  script:
+    - echo "DOCKER_IMAGE_TAG=1.0.$CI_PIPELINE_ID-$(date +%Y%m%d%H%M)" >> build.env      # Создает временный файл и удаляет его после завершения пайпа
+    - echo "DOCKER_IMAGE_TAG_TEST=$CI_REPOSITORY_URL-$(date +%Y%m%d%H%M)" >> build.env  # Создает временный файл и удаляет его после завершения пайпа
+    - date +"%Y%m%d%H%M"  # = 202402291610
+    - pwd       # Проверка дериктории ранера
+    - ls -la    # Проверка файла .env 
+    - cat build.env >> test2  # .env удалится после завершения пайплайна
+    - cat test2
+    - ls -la
+    - cp test2 $HOME # Запишет файл ранеру
+  artifacts:
+    reports:
+      dotenv: build.env # Указание именно joba, а не стейджа
+    
+
+
+unit-test-job:   # Тест работы глобальных переменных
+  stage: test
+  script:
+    - echo ${VAR1}
+    - echo ${VAR2}
+    - echo "$DOCKER_IMAGE_TAG" # Проверка переменной в другой jobe
+  dependencies:
+    - build-job # Указание именно его, а не стейджа 
+
+lint-test-job:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+  script:
+    - echo ${VAR1}
+    - echo ${VAR2}
+    - echo "$DOCKER_IMAGE_TAG_TEST"
+  dependencies:
+    - build-job 
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  environment: production
+  script:
+    - echo ${VAR1}
+    - echo ${VAR2}
+    - echo "$DOCKER_IMAGE_TAG"
+  dependencies:
+    - build-job # Указание именно его, а не стейджа
