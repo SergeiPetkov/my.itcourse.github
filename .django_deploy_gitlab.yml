@@ -1,0 +1,90 @@
+stages:
+  - start-job
+  - download_repository
+  - build
+  - push
+  - test
+  - deploy
+
+variables:
+  REPO_NAME: "sergeypetkov"
+  REMOTE_APP_DIR: "simple-django-project"
+  REMOTE_HOST: "usr1@192.168.1.194" 
+
+start-job:
+  stage: start-job
+  script:
+    - export NEW_TIMESTAMP=$(date +"%Y%m%d%H%M")
+    - echo "DOCKER_IMAGE_TAG=1.0.$CI_PIPELINE_ID-$(date +%Y%m%d%H%M)" >> start-job.env
+    - echo "$DOCKER_IMAGE_TAG"
+    - pwd
+  artifacts:
+    reports:
+      dotenv: start-job.env
+
+download_repository:    
+  stage: download_repository
+  script:
+    - cd $HOME
+    - rm -rf simple-django-project
+    - git clone git@master.gitlab:root/simple-django-project.git
+    - cd ~/simple-django-project
+    - git checkout origin/deploy
+    - pwd
+    - ls -la
+    - whoami
+    - ls -la ~/simple-django-project/templates/
+    - sh -c "sed -e "s/my-new-version/'$DOCKER_IMAGE_TAG'/g" ~/simple-django-project/templates/signup.html.tpl > ~/simple-django-project/templates/signup.html"
+  dependencies:
+    - start-job
+
+build-job:       
+  stage: build
+  script:
+    - cd $HOME
+    - cd $REMOTE_APP_DIR
+    - pwd
+    - echo "$DOCKER_IMAGE_TAG"
+    - env | grep DOCKER_IMAGE_TAG
+    - sh -c "docker build -t $REPO_NAME/gitlabrepo:$DOCKER_IMAGE_TAG ."
+    - echo "Build complete."
+  dependencies:
+    - start-job
+
+    
+push-job:
+  stage: push
+  script:
+    - pwd
+    - echo "$DOCKER_IMAGE_TAG"
+    - env | grep DOCKER_IMAGE_TAG
+    - echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
+    - docker push "$REPO_NAME"/gitlabrepo:"$DOCKER_IMAGE_TAG"
+  dependencies:
+    - start-job
+  
+unit-test-job:  
+  stage: test   
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - echo "Code coverage is 90%"
+
+lint-test-job:   
+  stage: test
+  script:
+    - echo "Linting code... This will take about 5 seconds."
+    - echo "No lint issues found."
+
+deploy-job:      
+  stage: deploy  
+  environment: production
+  script:
+    - scp -o StrictHostKeyChecking=accept-new ~/$REMOTE_APP_DIR/compose.yaml $REMOTE_HOST:~/$REMOTE_APP_DIR
+    - echo $DOCKER_IMAGE_TAG
+    - ssh $REMOTE_HOST "whoami"
+    - ssh $REMOTE_HOST "TAG=\"$DOCKER_IMAGE_TAG\" docker compose -f ~/simple-django-project/compose.yaml up -d --build --force-recreate"
+  dependencies:
+    - start-job
+
+
+
