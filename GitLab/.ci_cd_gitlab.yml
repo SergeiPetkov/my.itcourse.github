@@ -36,7 +36,6 @@ build-job:
   script:
     - cd $HOME/$REMOTE_APP_DIR
     - docker build -t $REPO_NAME/gitlabrepo:$DOCKER_IMAGE_TAG -f $HOME/$REMOTE_APP_DIR/Dockerfile .
-    - echo "Build complete."
   dependencies:
     - start-job
 
